@@ -31,25 +31,20 @@ class WooCommerceService:
 
             print("WooCommerce Store API URL:", url)
             print("WooCommerce status:", response.status_code)
-            print(
-                "WooCommerce content-type:",
-                response.headers.get("Content-Type")
-            )
+            print("WooCommerce content-type:",
+                  response.headers.get("Content-Type"))
             print("WooCommerce response:", response.text[:500])
 
             response.raise_for_status()
 
-            try:
-                return response.json()
+            return response.json()
 
-            except ValueError:
-                raise Exception(
-                    f"WooCommerce did not return JSON. "
-                    f"Response: {response.text[:500]}"
-                )
+        except ValueError:
+            raise Exception(
+                f"WooCommerce did not return JSON. "
+                f"Response: {response.text[:500]}"
+            )
 
         except requests.exceptions.RequestException as e:
             print("WooCommerce connection error:", repr(e))
-            raise Exception(
-                f"WooCommerce connection error: {e}"
-            )
+            raise Exception(f"WooCommerce connection error: {e}")
