@@ -4,14 +4,14 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 
 from routes.products import products_bp
-
+from routes.chat import chat_bp
 
 app = Flask(__name__)
 
 CORS(app)
 
 app.register_blueprint(products_bp)
-
+app.register_blueprint(chat_bp)
 
 @app.route("/")
 def home():
